@@ -1,4 +1,4 @@
-export type PostContentShape = {
+export type PostContentSchema = {
 	subReddit: {
 		label: string;
 		imgSrc: string;

@@ -20,9 +20,9 @@ const icons = {
 	portfolio,
 };
 
-export type IconName = keyof typeof icons;
+export type AnimatedIconName = keyof typeof icons;
 
-const animationTypeEnding: Record<IconName, string> = {
+const animationTypeEnding: Record<AnimatedIconName, string> = {
 	browse_feed: '-view-5',
 	source_code: '-build',
 	portfolio: '-account',

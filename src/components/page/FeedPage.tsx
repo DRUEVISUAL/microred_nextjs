@@ -12,8 +12,11 @@ export default function FeedPage({ slug }: FeedPageProps) {
 	return (
 		<Wrapper
 			sectionLabel={slug + ' feed'}
-			className="grid place-content-center"
+			className="flex w-auto basis-full flex-col items-center justify-center gap-12 lg:ml-[272px] lg:!pl-4"
 		>
+			<Post />
+			<Post />
+			<Post />
 			<Post />
 		</Wrapper>
 	);

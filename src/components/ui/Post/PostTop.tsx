@@ -3,11 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // Types
-import { PostContentShape } from '@/lib/types';
+import { PostContentSchema } from '@/lib/types';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-type PostTopProps = { post: PostContentShape };
+type PostTopProps = { post: PostContentSchema };
 
 export default function PostTop({ post }: PostTopProps) {
 	const { imgSrc, label } = post.subReddit;
@@ -18,7 +18,7 @@ export default function PostTop({ post }: PostTopProps) {
 			<div className="flex items-center justify-between gap-8 p-2">
 				<Link
 					href={'/r'}
-					className="flex items-center gap-2"
+					className="focused flex items-center gap-2"
 				>
 					<Image
 						src={imgSrc}
@@ -31,12 +31,21 @@ export default function PostTop({ post }: PostTopProps) {
 				</Link>
 				<div className="flex items-center gap-4">
 					<p>
-						Posted by: <Link href={'/u'}> {creator}</Link>
+						Posted by:{' '}
+						<Link
+							href={'/u'}
+							className="focused"
+						>
+							{' '}
+							{creator}
+						</Link>
 					</p>
 					<p>{time}</p>
 				</div>
 			</div>
-			<h2 className="bg-card-layer2 text-pretty rounded-b-md p-2 text-lg font-semibold">{title}</h2>
+			<h2 className="text-pretty rounded-b-md bg-card-layer-2 p-2 text-lg font-semibold">
+				{title}
+			</h2>
 		</header>
 	);
 }

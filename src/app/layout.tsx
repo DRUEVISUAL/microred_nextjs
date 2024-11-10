@@ -6,12 +6,21 @@ import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
+// Components
+import SideNav from '@/components/ui/SideNav';
+
 ////////////////////////////////////////////////////////////////////////////////
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
 	variable: '--font-geist-sans',
 	weight: '500 600',
+});
+
+const geistMono = localFont({
+	src: './fonts/GeistMonoVF.woff',
+	variable: '--font-geist-mono',
+	weight: '400 500 600 700',
 });
 
 export const viewport: Viewport = {
@@ -63,16 +72,17 @@ export const metadata: Metadata = {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default function RootLayout({
-	children,
-}: Readonly<{
+type RootLayoutProps = Readonly<{
 	children: ReactNode;
-}>) {
+}>;
+
+export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} dark bg-background text-foreground antialiased selection:bg-primary selection:text-white`}
+				className={`${geistSans.variable} ${geistMono.variable} dark antialiased selection:bg-primary selection:text-white`}
 			>
+				<SideNav />
 				{children}
 			</body>
 		</html>

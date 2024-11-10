@@ -4,14 +4,14 @@ import AnimatedIconWithText from '../ui/AnimatedIcon';
 import Wrapper from '../ui/Wrapper';
 
 // Types
-import { IconName } from '../ui/AnimatedIcon';
+import { AnimatedIconName } from '../ui/AnimatedIcon';
 
 ////////////////////////////////////////////////////////////////////////////////
 
 type Links = {
 	label: string;
 	url: string;
-	name: IconName;
+	name: AnimatedIconName;
 	target: '_blank' | '_self';
 }[];
 

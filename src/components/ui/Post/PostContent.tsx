@@ -2,16 +2,16 @@
 import Image from 'next/image';
 
 // Types
-import { PostContentShape } from '@/lib/types';
+import { PostContentSchema } from '@/lib/types';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-type PostContentProps = { post: PostContentShape };
+type PostContentProps = { post: PostContentSchema };
 
 export default function PostContent({ post }: PostContentProps) {
 	const { content, title } = post;
 	return (
-		<section className="h-[75vh] min-h-[468px] rounded-lg border-px bg-card-layer p-2 shadow-sm">
+		<section className="h-[75vh] min-h-[468px] rounded-lg border-px bg-card-layer/25 p-2 shadow-sm">
 			<Image
 				src={content}
 				alt={title}

@@ -17,7 +17,7 @@ const config: Config = {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					layer: 'hsl(var(--card-layer))',
-					layer2: 'hsl(var(--card-layer2))',
+					'layer-2': 'hsl(var(--card-layer-2))',
 					foreground: 'hsl(var(--card-foreground))',
 				},
 
@@ -59,6 +59,9 @@ const config: Config = {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)',
+			},
+			backgroundImage: {
+				search: "url('/assets/svg/ui/search.svg')",
 			},
 		},
 	},
