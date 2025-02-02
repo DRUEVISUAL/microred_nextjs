@@ -1,3 +1,5 @@
+'use client';
+
 // Components
 import Link from 'next/link';
 import AnimatedIconWithText from '../ui/AnimatedIcon';
@@ -5,6 +7,11 @@ import Wrapper from '../ui/Wrapper';
 
 // Types
 import { AnimatedIconName } from '../ui/AnimatedIcon';
+import { BackgroundGradientAnimation } from '../ui/BackgroundGradientAnimation';
+
+// Images
+import logo from '../../../public/assets/svg/logo.svg';
+import Image from 'next/image';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -35,14 +42,19 @@ export default function LandingPage() {
 	return (
 		<Wrapper
 			sectionLabel="Landing Section"
-			className="grid place-content-center gap-16"
+			className="grid h-screen place-content-center gap-16"
 		>
 			<div className="flex flex-col items-center justify-center gap-4">
+				<Image
+					src={logo}
+					alt="microred logo"
+					className="size-10"
+				/>
 				<h1 className="text-5xl font-semibold lg:text-7xl">Microred</h1>
 				<p>Alternative for browsing reddit.</p>
 			</div>
 
-			<div className="flex gap-4">
+			<div className="relative z-10 flex gap-4">
 				{links.map((link, index) => {
 					const isNotLastItem = index !== links.length - 1;
 					return (
@@ -65,6 +77,7 @@ export default function LandingPage() {
 					);
 				})}
 			</div>
+			<BackgroundGradientAnimation />
 		</Wrapper>
 	);
 }

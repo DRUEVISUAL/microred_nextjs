@@ -1,7 +1,7 @@
 'use client';
 
 // Types
-import { PostContentSchema } from '@/lib/types';
+import { ConstructedRedditPost } from '@/lib/types';
 
 // Components
 import VoteButton from './VoteButton';
@@ -12,21 +12,21 @@ import { useState } from 'react';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-type PostBottomProps = { post: PostContentSchema };
+type PostBottomProps = { post: ConstructedRedditPost };
 
 export type VoteState = null | 'upVote' | 'downVote';
 
 export default function PostBottom({ post }: PostBottomProps) {
-	const { likeCount, commentCount } = post;
+	const { score, num_comments } = post.bottom;
 
 	const [voteState, setVoteState] = useState<VoteState>(null);
 
-	const likeCounter =
+	const scoreCounter =
 		voteState === null
-			? likeCount
+			? score
 			: voteState === 'upVote'
-				? likeCount + 1
-				: voteState === 'downVote' && likeCount - 1;
+				? score + 1
+				: voteState === 'downVote' && score - 1;
 
 	const handleClickVote = (value: VoteState) => {
 		setVoteState((prevState) => (prevState === null ? value : prevState === value ? null : value));
@@ -41,7 +41,7 @@ export default function PostBottom({ post }: PostBottomProps) {
 					handleClickVote={handleClickVote}
 				/>
 				<div className="h-full border-x-px border-card-layer-2 px-2 font-mono text-xs font-medium">
-					{likeCounter}
+					{scoreCounter}
 				</div>
 				<VoteButton
 					type="downVote"
@@ -55,7 +55,7 @@ export default function PostBottom({ post }: PostBottomProps) {
 					name="comment"
 					className="size-3"
 				/>
-				{commentCount} Comment
+				{num_comments} Comment
 			</button>
 		</footer>
 	);

@@ -86,4 +86,20 @@ body {
 	.focused {
 		@apply focus:outline focus:outline-1 focus:outline-primary rounded-md;
 	}
+	div .md p {
+		@apply text-pretty my-4
+	}
+	div .md a {
+		@apply underline text-blue-400 my-2 hover:text-blue-300
+	}
+
+	div .md ul {
+		@apply my-2
+	}
+
+	div .md li {
+		@apply my-1 list-disc
+	}
 }
+
+

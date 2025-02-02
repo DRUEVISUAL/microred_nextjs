@@ -8,6 +8,7 @@ import { ReactNode } from 'react';
 
 // Components
 import SideNav from '@/components/ui/SideNav';
+import TanstackQueryClientProvider from '@/providers/queryClientProvider';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -32,14 +33,6 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
 	// metadataBase: new URL(''),
-	// alternates: {
-	//   canonical: '/',
-	//   languages: {
-	//     'sk-SK': '/sk',
-	//     'hu-HU': '/hu',
-	//     'en-US': '/en',
-	//   },
-	// },
 	title: '',
 	description: '',
 	referrer: 'origin',
@@ -51,19 +44,12 @@ export const metadata: Metadata = {
 		follow: true,
 	},
 	generator: 'Next.js',
-	// formatDetection: {
-	//   email: true,
-	//   address: true,
-	//   telephone: true,
-	// },
-
 	openGraph: {
 		type: 'website',
 		title: '',
 		description: '',
 		images: '/og-image.jpeg',
 	},
-
 	verification: {
 		google: 'google',
 	},
@@ -82,8 +68,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} dark antialiased selection:bg-primary selection:text-white`}
 			>
-				<SideNav />
-				{children}
+				<TanstackQueryClientProvider>
+					<SideNav />
+					{children}
+				</TanstackQueryClientProvider>
 			</body>
 		</html>
 	);
