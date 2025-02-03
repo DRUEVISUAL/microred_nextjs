@@ -7,7 +7,7 @@ type SearchProps = { value: string; handleSearchInput: (value: string) => void }
 
 export default function Search({ value, handleSearchInput }: SearchProps) {
 	return (
-		<div className="flex rounded-lg shadow-sm focus-within:outline focus-within:outline-1 focus-within:outline-primary">
+		<div className="flex rounded-lg shadow-xs focus-within:outline focus-within:outline-primary">
 			<input
 				type="text"
 				placeholder="Search"

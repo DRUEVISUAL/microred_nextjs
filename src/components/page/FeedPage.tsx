@@ -54,7 +54,7 @@ export default function FeedPage({ slug, isSubreddit }: FeedPageProps) {
 	return (
 		<Wrapper
 			sectionLabel={slug + ' feed'}
-			className="flex w-auto max-w-[1740px] basis-full flex-col items-center justify-center gap-12 lg:ml-[272px] lg:!pl-4"
+			className="flex w-auto max-w-[1740px] basis-full flex-col items-center justify-center gap-12 lg:ml-[272px] lg:pl-4!"
 		>
 			{isSubreddit && <SubredditBanner slug={slug} />}
 

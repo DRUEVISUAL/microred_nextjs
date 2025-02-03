@@ -12,7 +12,7 @@ type PostProps = { post: ConstructedRedditPost };
 
 export default function Post({ post }: PostProps) {
 	return (
-		<article className="flex w-full relative z-20 flex-col gap-2 rounded-lg border-px border-border/75 bg-card p-2 shadow-sm lg:max-w-screen-md">
+		<article className="flex w-full relative z-20 flex-col gap-2 rounded-lg border-px border-border/75 bg-card p-2 shadow-xs lg:max-w-(--breakpoint-md)">
 			<PostTop post={post} />
 			<PostContent post={post} />
 			<PostBottom post={post} />

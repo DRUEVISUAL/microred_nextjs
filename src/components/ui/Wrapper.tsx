@@ -12,7 +12,7 @@ export default function Wrapper({ children, sectionLabel, className }: WrapperPr
 	return (
 		<section
 			aria-label={sectionLabel}
-			className={cn('mx-auto h-full min-h-[667px] w-full max-w-screen-2xl p-4 lg:p-8', className)}
+			className={cn('mx-auto h-full min-h-[667px] w-full max-w-(--breakpoint-2xl) p-4 lg:p-8', className)}
 		>
 			{children}
 		</section>

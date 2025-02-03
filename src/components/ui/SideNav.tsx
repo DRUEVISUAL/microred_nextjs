@@ -73,7 +73,7 @@ export default function SideNav() {
 				handleSearchInput={handleSearchInput}
 			/>
 			<div className="flex w-full flex-col gap-2 rounded-lg bg-black/10 p-2">
-				<div className="z-10 flex max-h-48 flex-col gap-2 overflow-y-auto overflow-x-clip rounded-md border-px border-border/20 bg-muted/30 font-medium shadow-sm">
+				<div className="z-10 flex max-h-48 flex-col gap-2 overflow-y-auto overflow-x-clip rounded-md border-px border-border/20 bg-muted/30 font-medium shadow-xs">
 					{/* <Link
 						href={`/${subreddit_name_prefixed}`}
 						className="focused flex items-center gap-2"

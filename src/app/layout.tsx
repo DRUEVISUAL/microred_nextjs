@@ -66,7 +66,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} dark antialiased selection:bg-primary selection:text-white`}
+				className={`${geistSans.variable} ${geistMono.variable} selection:bg-primary antialiased selection:text-white`}
 			>
 				<TanstackQueryClientProvider>
 					<SideNav />

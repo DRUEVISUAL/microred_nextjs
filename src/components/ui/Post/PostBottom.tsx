@@ -33,7 +33,7 @@ export default function PostBottom({ post }: PostBottomProps) {
 	};
 
 	return (
-		<footer className="flex items-center justify-between rounded-lg border-px bg-card-layer text-sm shadow-sm">
+		<footer className="flex items-center justify-between rounded-lg border-px bg-card-layer text-sm shadow-xs">
 			<div className="flex items-center">
 				<VoteButton
 					type="upVote"

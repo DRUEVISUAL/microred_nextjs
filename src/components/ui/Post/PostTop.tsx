@@ -37,7 +37,7 @@ export default function PostTop({ post }: PostTopProps) {
 	const icon_img = ampersandConverter(data?.icon_img) ?? ampersandConverter(data?.community_icon);
 
 	return (
-		<header className="shadow-xs flex flex-col rounded-md border-px bg-card-layer text-sm">
+		<header className="shadow-2xs flex flex-col rounded-md border-px bg-card-layer text-sm">
 			<div className="flex items-center justify-between gap-8 p-2">
 				<Link
 					href={`/${subreddit_name_prefixed}`}

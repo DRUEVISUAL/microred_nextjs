@@ -75,7 +75,7 @@ export default function PostContent({ post }: PostContentProps) {
 		}, [api]);
 
 		return (
-			<section className="relative h-[75vh] max-h-[768px] min-h-[468px] rounded-lg border-px bg-card-layer/25 p-2 shadow-sm">
+			<section className="relative h-[75vh] max-h-[768px] min-h-[468px] rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
 				<Carousel setApi={setApi}>
 					<CarouselContent>
 						{imgSrcs?.map((imgSrc, index) => {
@@ -85,7 +85,7 @@ export default function PostContent({ post }: PostContentProps) {
 									<img
 										src={imgSrc}
 										alt={alt}
-										className="mx-auto h-[calc(75vh-18px)] max-h-[768px] min-h-[468px] w-full overflow-hidden rounded-md object-contain shadow-sm"
+										className="mx-auto h-[calc(75vh-18px)] max-h-[768px] min-h-[468px] w-full overflow-hidden rounded-md object-contain shadow-xs"
 									/>
 								</CarouselItem>
 							);
@@ -121,13 +121,13 @@ export default function PostContent({ post }: PostContentProps) {
 		const alt = content.subreddit_name_prefixed + ' ' + content.title;
 
 		return (
-			<section className="relative h-[75vh] min-h-[468px] overflow-hidden rounded-lg border-px bg-card-layer/25 p-2 shadow-sm">
+			<section className="relative h-[75vh] min-h-[468px] overflow-hidden rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
 				<Image
 					src={content.url}
 					alt={alt}
 					width={512}
 					height={512}
-					className="relative z-10 mx-auto h-full w-max rounded-md object-contain shadow-sm"
+					className="relative z-10 mx-auto h-full w-max rounded-md object-contain shadow-xs"
 				/>
 				<Image
 					src={content.url}
@@ -149,7 +149,7 @@ export default function PostContent({ post }: PostContentProps) {
 		return (
 			<section
 				ref={ref}
-				className="flex h-[75vh] min-h-[468px] items-center justify-center rounded-lg border-px bg-card-layer/25 p-2 shadow-sm"
+				className="flex h-[75vh] min-h-[468px] items-center justify-center rounded-lg border-px bg-card-layer/25 p-2 shadow-xs"
 			>
 				<ReactPlayer
 					url={video?.hls_url}
@@ -172,7 +172,7 @@ export default function PostContent({ post }: PostContentProps) {
 		const decodedHtml = decode(content);
 
 		return (
-			<section className="flex max-h-[360px] md items-start justify-start overflow-y-scroll rounded-lg border-px bg-card-layer/25 p-2 shadow-sm">
+			<section className="flex max-h-[360px] md items-start justify-start overflow-y-scroll rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
 				<div dangerouslySetInnerHTML={{ __html: decodedHtml }} />
 			</section>
 		);
@@ -192,7 +192,7 @@ export default function PostContent({ post }: PostContentProps) {
 		const { src, allow, referrerpolicy, title } = parsedDocument.children[0].attribs;
 
 		return (
-			<section className="flex h-[75vh] min-h-[468px] items-center justify-center rounded-lg border-px bg-card-layer/25 p-2 shadow-sm">
+			<section className="flex h-[75vh] min-h-[468px] items-center justify-center rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
 				<iframe
 					className="h-full w-full rounded-md object-contain"
 					width={320}
@@ -218,7 +218,7 @@ export default function PostContent({ post }: PostContentProps) {
 		const height = source?.height;
 
 		return (
-			<section className="h-max rounded-lg border-px bg-card-layer/25 p-2 shadow-sm">
+			<section className="h-max rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
 				<Link
 					href={content.url}
 					target="_blank"
@@ -231,7 +231,7 @@ export default function PostContent({ post }: PostContentProps) {
 							aria-hidden
 							width={width}
 							height={height}
-							className="pointer-events-none mx-auto h-64 max-w-max overflow-hidden rounded-md shadow-sm"
+							className="pointer-events-none mx-auto h-64 max-w-max overflow-hidden rounded-md shadow-xs"
 						/>
 					)}
 
@@ -250,7 +250,7 @@ export default function PostContent({ post }: PostContentProps) {
 		content = post.content.link;
 
 		return (
-			<section className="h-max rounded-lg border-px bg-card-layer/25 p-2 shadow-sm">
+			<section className="h-max rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
 				<Link
 					href={content.url}
 					target="_blank"
