@@ -53,6 +53,7 @@
 			background-position: 200% center;
 		}
 	}
+
 	@keyframes aurora {
 		from {
 			background-position:
@@ -116,40 +117,7 @@
 	::file-selector-button {
 		border-color: var(--color-gray-200, currentColor);
 	}
-}
 
-@utility noninteractive {
-	@apply pointer-events-none selection:bg-transparent;
-}
-
-@utility focused {
-	@apply focus:outline-primary rounded-md focus:outline;
-}
-
-@utility md {
-	div & p {
-		@apply my-4 text-pretty;
-	}
-	div & a {
-		@apply my-2 text-blue-400 underline hover:text-blue-300;
-	}
-
-	div & ul {
-		@apply my-2;
-	}
-
-	div & li {
-		@apply my-1 list-disc;
-	}
-}
-
-@layer utilities {
-	body {
-		font-family: Arial, Helvetica, sans-serif;
-	}
-}
-
-@layer base {
 	:root {
 		--background: 0 0% 3.9%;
 		--foreground: 0 0% 98%;
@@ -180,13 +148,42 @@
 
 		--radius: 0.5rem;
 	}
-}
 
-@layer base {
 	* {
 		@apply border-border;
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+}
+
+@utility noninteractive {
+	@apply pointer-events-none selection:bg-transparent;
+}
+
+@utility focused {
+	@apply focus:outline-primary rounded-md focus:outline;
+}
+
+@utility md {
+	div & p {
+		@apply my-4 text-pretty;
+	}
+	div & a {
+		@apply my-2 text-blue-400 underline hover:text-blue-300;
+	}
+
+	div & ul {
+		@apply my-2;
+	}
+
+	div & li {
+		@apply my-1 list-disc;
+	}
+}
+
+@layer utilities {
+	body {
+		font-family: Arial, Helvetica, sans-serif;
 	}
 }

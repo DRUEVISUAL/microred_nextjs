@@ -3,13 +3,13 @@ import { ConstructedRedditPost } from "@/lib/types";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default function createPostObject(post: FullRedditPost): ConstructedRedditPost {
+export default function createPostObject(post: FullRedditPost) {
 
     // String
-    const { subreddit_name_prefixed, subreddit_id, title, selftext_html, post_hint, author, permalink, is_gallery, url_overridden_by_dest, domain, id, url } = post.data
+    const { subreddit_name_prefixed, subreddit_id, title, selftext_html, post_hint, author, permalink, is_gallery, domain, id, url } = post.data
 
     // Number
-    const { thumbnail_height, thumbnail_width, score, created_utc, num_comments } = post.data
+    const { score, created_utc, num_comments } = post.data
 
     // Complex
     const { secure_media } = post.data

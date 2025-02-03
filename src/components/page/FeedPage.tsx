@@ -11,6 +11,7 @@ import Wrapper from '../ui/Wrapper';
 import getFeed from '@/utils/getFeed';
 import Skeleton from '../ui/Post/Skeleton';
 import { BackgroundGradientAnimation } from '../ui/BackgroundGradientAnimation';
+import SubredditBanner from '../ui/SubredditBanner';
 
 // Types
 import { Feed } from '@/lib/types';
@@ -20,7 +21,6 @@ import createPostObject from '@/utils/createPostObject';
 
 // Images
 import { AlertTriangle } from 'lucide-react';
-import SubredditBanner from '../ui/SubredditBanner';
 
 ////////////////////////////////////////////////////////////////////////////////
 
