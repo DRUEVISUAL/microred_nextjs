@@ -1,8 +1,13 @@
-import { cn } from '@/lib/utils';
-import ampersandConverter from '@/utils/convertToAmpersand';
+// Utilities
+import createSubredditBannerObject from '@/utils/createSubredditBannerObject';
+
+// Hooks
 import { useQuery } from '@tanstack/react-query';
+
+// Components
 import Image from 'next/image';
-import React from 'react';
+
+////////////////////////////////////////////////////////////////////////////////
 
 type SubredditBannerProps = {
 	slug: string;
@@ -14,59 +19,47 @@ export default function SubredditBanner({ slug }: SubredditBannerProps) {
 		queryFn: async () => {
 			const response = await fetch(`https://www.reddit.com/${slug}/about.json`);
 			const responseJSON: SubredditData = await response.json();
-			return responseJSON;
+			const subredditBannerObject = createSubredditBannerObject(responseJSON.data);
+			return subredditBannerObject;
 		},
 	});
 
-	const data = query?.data?.data;
-
-	const icon_img = ampersandConverter(data?.icon_img) ?? ampersandConverter(data?.community_icon);
-	const keyColor = data?.key_color || '#ffffff';
-
-	const banner =
-		ampersandConverter(data?.banner_background_image) ??
-		ampersandConverter(data?.mobile_banner_image) ??
-		ampersandConverter(data?.banner_img);
-	const size = data?.banner_size || [2048, 512];
-	const backgroundColor = data?.banner_background_color;
-
-	const subreddit = data?.display_name_prefixed;
-	const subscribers = data?.subscribers;
+	const data = query?.data;
 
 	return (
-		<div className="relative flex h-64 w-full items-center gap-8 overflow-hidden rounded-lg border-px border-border/20 p-4 shadow-lg group">
-			<div className="flex items-center gap-4 z-20 group-hover:opacity-0">
-				{icon_img ? (
+		<div className="border-px border-border/20 group relative flex h-64 w-full items-center gap-8 overflow-hidden rounded-lg p-4 shadow-lg">
+			<div className="z-20 flex items-center gap-4 group-hover:opacity-0">
+				{data?.iconImg ? (
 					<Image
-						src={icon_img!}
+						src={data?.iconImg!}
 						width={128}
 						height={128}
 						alt={slug + ' subreddit image'}
-						className="size-36 rounded-full border-px border-border/20 shadow-md"
-						style={{ backgroundColor: keyColor }}
+						className="border-px border-border/20 size-20 rounded-full shadow-md md:size-36"
+						style={{ backgroundColor: data?.keyColor }}
 					/>
 				) : (
-					<div className="size-36 rounded-full border-px border-border/20 bg-primary shadow-md"></div>
+					<div className="border-px border-border/20 bg-primary size-36 rounded-full shadow-md"></div>
 				)}
-				<div className="flex flex-col gap-2 rounded-lg border-border bg-black/30 p-2 shadow-md backdrop-blur-md">
-					<h2 className="text-2xl font-semibold">{subreddit}</h2>
-					<p>{subscribers} members</p>
+				<div className="border-border flex flex-col gap-2 rounded-lg bg-black/30 p-2 shadow-md backdrop-blur-md">
+					<h2 className="text-xl font-semibold md:text-2xl">{data?.subreddit}</h2>
+					<p className="text-sm text-neutral-300">{data?.subscribers} members</p>
 				</div>
 			</div>
 
-			{banner ? (
+			{data?.banner ? (
 				<Image
-					src={banner!}
-					width={size[0]}
-					height={size[1]}
+					src={data?.banner}
+					width={data?.size[0]}
+					height={data?.size[1]}
 					quality={60}
 					alt={slug + ' subreddit image'}
-					className="absolute left-0 top-0 h-full w-full z-10 rounded-lg object-cover blur-md group-hover:blur-none transition-all duration-300"
+					className="absolute top-0 left-0 z-10 h-full w-full rounded-lg object-cover blur-md transition-all duration-300 group-hover:blur-none"
 				/>
 			) : (
 				<div
-					className="absolute left-0 top-0 z-10 h-full w-full rounded-lg"
-					style={{ backgroundColor }}
+					className="absolute top-0 left-0 z-10 h-full w-full rounded-lg"
+					style={{ backgroundColor: data?.backgroundColor }}
 				></div>
 			)}
 		</div>
