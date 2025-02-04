@@ -172,7 +172,7 @@ export default function PostContent({ post }: PostContentProps) {
 		const decodedHtml = decode(content);
 
 		return (
-			<section className="flex max-h-[360px] md items-start justify-start overflow-y-scroll rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
+			<section className="flex max-h-[360px] markdown_style items-start justify-start overflow-y-scroll rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
 				<div dangerouslySetInnerHTML={{ __html: decodedHtml }} />
 			</section>
 		);
@@ -222,7 +222,7 @@ export default function PostContent({ post }: PostContentProps) {
 				<Link
 					href={content.url}
 					target="_blank"
-					className="relative h-64 max-w-max"
+					className="relative h-64 max-w-max rounded-md overflow-hidden hover:brightness-110 grid place-content-center"
 				>
 					{imgSrc && (
 						<Image
@@ -231,7 +231,7 @@ export default function PostContent({ post }: PostContentProps) {
 							aria-hidden
 							width={width}
 							height={height}
-							className="pointer-events-none mx-auto h-64 max-w-max overflow-hidden rounded-md shadow-xs"
+							className="pointer-events-none mx-auto h-64 w-full object-cover rounded-md shadow-xs"
 						/>
 					)}
 

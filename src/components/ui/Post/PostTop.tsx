@@ -37,11 +37,11 @@ export default function PostTop({ post }: PostTopProps) {
 	const icon_img = ampersandConverter(data?.icon_img) ?? ampersandConverter(data?.community_icon);
 
 	return (
-		<header className="shadow-2xs flex flex-col rounded-md border-px bg-card-layer text-sm">
+		<header className="border-px bg-card-layer flex flex-col rounded-md shadow-2xs">
 			<div className="flex items-center justify-between gap-8 p-2">
 				<Link
 					href={`/${subreddit_name_prefixed}`}
-					className="focused flex items-center gap-2"
+					className="focused flex items-center gap-2 text-xs sm:text-sm font-semibold"
 				>
 					{icon_img ? (
 						<Image
@@ -52,12 +52,12 @@ export default function PostTop({ post }: PostTopProps) {
 							height={216}
 						/>
 					) : (
-						<div className="size-5 rounded-full bg-primary"></div>
+						<div className="bg-primary size-5 rounded-full"></div>
 					)}
 
 					<p>{subreddit_name_prefixed}</p>
 				</Link>
-				<div className="flex items-center gap-4">
+				<div className="flex items-center gap-1 text-xs text-neutral-300 sm:text-sm">
 					<p>
 						By:{' '}
 						<Link
@@ -65,10 +65,10 @@ export default function PostTop({ post }: PostTopProps) {
 							target="_blank"
 							className="focused"
 						>
-							{' '}
 							{author}
 						</Link>
 					</p>
+					{'·'}
 					<p>{age}</p>
 				</div>
 			</div>
@@ -76,7 +76,7 @@ export default function PostTop({ post }: PostTopProps) {
 				href={postUrl}
 				target="_blank"
 			>
-				<h2 className="text-pretty rounded-b-md bg-card-layer-2 p-2 text-lg font-semibold">
+				<h2 className="bg-card-layer-2 rounded-b-md p-2 text-lg font-semibold text-pretty">
 					{title}
 				</h2>
 			</Link>
