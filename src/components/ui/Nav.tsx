@@ -17,11 +17,11 @@ import useDebounce from '@/hooks/useDebounce';
 
 // Image
 import logo from '../../../public/assets/svg/logo.svg';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default function SideNav() {
+export default function Nav() {
 	const pathname = usePathname().split('/')[1];
 	const [isDesktopNavHidden, setIsDesktopNavHidden] = useState(true);
 	const [isPhoneNavHiddenOnScroll, setIsPhoneNavHiddenOnScroll] = useState(false);
@@ -79,7 +79,7 @@ export default function SideNav() {
 		const overlay = document.createElement('div');
 		overlay.classList.add('bodyOverlay');
 		overlay.addEventListener('click', handleClickHidePhoneMenu);
-		
+
 		if (!isPhoneNavHidden) {
 			document.body.style.overflow = 'hidden';
 			document.body.appendChild(overlay);
@@ -143,7 +143,7 @@ export default function SideNav() {
 					onClick={handleClickHidePhoneMenu}
 					aria-label={isPhoneNavHidden ? 'Open menu' : 'Close menu'}
 				>
-					<Menu className="size-9 p-1.5" />
+					{isPhoneNavHidden ? <Menu className="size-9 p-1.5" /> : <X className="size-9 p-1.5" />}
 				</button>
 
 				<div

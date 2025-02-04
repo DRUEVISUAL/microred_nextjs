@@ -7,7 +7,7 @@ import type { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
 // Components
-import SideNav from '@/components/ui/SideNav';
+import Nav from '@/components/ui/Nav';
 import TanstackQueryClientProvider from '@/providers/queryClientProvider';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 				className={`${geistSans.variable} ${geistMono.variable} selection:bg-primary antialiased selection:text-white`}
 			>
 				<TanstackQueryClientProvider>
-					<SideNav />
+					<Nav />
 					{children}
 				</TanstackQueryClientProvider>
 			</body>

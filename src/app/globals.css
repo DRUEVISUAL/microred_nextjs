@@ -166,7 +166,7 @@
 /* @layer components: reusable components like buttons, forms, or cards. */
 @layer components {
 	.bodyOverlay {
-		@apply fixed inset-0 z-40 h-screen w-screen bg-black/50;
+		@apply fixed inset-0 z-40 h-screen w-screen bg-black/70;
 	}
 }
 

@@ -218,11 +218,11 @@ export default function PostContent({ post }: PostContentProps) {
 		const height = source?.height;
 
 		return (
-			<section className="h-max rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
+			<section className="h-max rounded-lg border-px bg-card-layer/25 p-2 shadow-xs grid place-content-center">
 				<Link
 					href={content.url}
 					target="_blank"
-					className="relative h-64 max-w-max rounded-md overflow-hidden hover:brightness-110 grid place-content-center"
+					className="relative h-64 max-w-max rounded-md overflow-hidden hover:brightness-110 "
 				>
 					{imgSrc && (
 						<Image
