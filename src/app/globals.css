@@ -111,6 +111,7 @@
 */
 
 /* @layer base is for default styles that apply globally, like setting the default font, background, and other base styles. */
+
 @layer base {
 	*,
 	::after,

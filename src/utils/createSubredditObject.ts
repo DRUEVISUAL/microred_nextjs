@@ -7,6 +7,6 @@ export default function createSubredditObject(subreddit: SubredditData) {
 
     return {
         string: { icon_img, description_html, title, banner_img },
-        Number: { subscribers, banner_size }
+        number: { subscribers, banner_size }
     }
 }
