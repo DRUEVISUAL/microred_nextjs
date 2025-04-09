@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 // Components
 import {
 	Carousel,
@@ -7,7 +9,6 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from '@/components/ui/shadcn/carousel';
-
 import ReactPlayer from 'react-player';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -35,17 +36,32 @@ export default function PostContent({ post }: PostContentProps) {
 	const { ref, inView } = useInView({ rootMargin: '-256px 0px -256px 0px' });
 	const postHint = post.content.post_hint;
 	const isGallery = post.content.image.is_gallery;
+
+	const [api, setApi] = useState<CarouselApi | null>(null);
+	const [current, setCurrent] = useState(0);
+	const [count, setCount] = useState(0);
+
+	useEffect(() => {
+		if (api) {
+			setCount(api.scrollSnapList().length);
+			setCurrent(api.selectedScrollSnap() + 1);
+
+			api.on('select', () => {
+				setCurrent(api.selectedScrollSnap() + 1);
+			});
+		}
+	}, [api]);
+
 	let content;
 
-	if (isGallery === true) {
-		const [api, setApi] = useState<CarouselApi>();
-		const [current, setCurrent] = useState(0);
-		const [count, setCount] = useState(0);
+	////////////////////////////////////////////////////////////////////////////////
 
+	// Gallery logic
+	if (isGallery) {
 		content = post.content?.image;
 		const alt = content.subreddit_name_prefixed + ' ' + content.title;
 		const media_metadata = content.media_metadata && Object.values(content.media_metadata);
-		if (!media_metadata) return;
+		if (!media_metadata) return null;
 		const imageIndexArray = Array.from(Array(count).keys());
 
 		let imgSrcs;
@@ -59,26 +75,13 @@ export default function PostContent({ post }: PostContentProps) {
 				})
 				.filter((imgSrc) => imgSrc !== undefined);
 		}
-		if (!imgSrcs) return;
-
-		useEffect(() => {
-			if (!api) {
-				return;
-			}
-
-			setCount(api.scrollSnapList().length);
-			setCurrent(api.selectedScrollSnap() + 1);
-
-			api.on('select', () => {
-				setCurrent(api.selectedScrollSnap() + 1);
-			});
-		}, [api]);
+		if (!imgSrcs) return null;
 
 		return (
-			<section className="relative h-[75vh] max-h-[768px] min-h-[468px] rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
+			<section className="border-px bg-card-layer/25 relative h-[75vh] max-h-[768px] min-h-[468px] rounded-lg p-2 shadow-xs">
 				<Carousel setApi={setApi}>
 					<CarouselContent>
-						{imgSrcs?.map((imgSrc, index) => {
+						{imgSrcs.map((imgSrc, index) => {
 							const key = alt + index + 'carousel_item';
 							return (
 								<CarouselItem key={key}>
@@ -116,12 +119,13 @@ export default function PostContent({ post }: PostContentProps) {
 
 	////////////////////////////////////////////////////////////////////////////////
 
+	// Image logic
 	if (postHint === 'image') {
 		content = post.content.image;
 		const alt = content.subreddit_name_prefixed + ' ' + content.title;
 
 		return (
-			<section className="relative h-[75vh] min-h-[468px] overflow-hidden rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
+			<section className="border-px bg-card-layer/25 relative h-[75vh] min-h-[468px] overflow-hidden rounded-lg p-2 shadow-xs">
 				<Image
 					src={content.url}
 					alt={alt}
@@ -134,7 +138,7 @@ export default function PostContent({ post }: PostContentProps) {
 					alt={alt}
 					width={512}
 					height={512}
-					className="absolute left-0 top-0 h-full w-full object-cover opacity-20 blur-xl"
+					className="absolute top-0 left-0 h-full w-full object-cover opacity-20 blur-xl"
 				/>
 			</section>
 		);
@@ -142,6 +146,7 @@ export default function PostContent({ post }: PostContentProps) {
 
 	////////////////////////////////////////////////////////////////////////////////
 
+	// Video logic (hosted)
 	if (postHint === 'hosted:video') {
 		content = post.content.video;
 		const video = content.secure_media?.reddit_video;
@@ -149,7 +154,7 @@ export default function PostContent({ post }: PostContentProps) {
 		return (
 			<section
 				ref={ref}
-				className="flex h-[75vh] min-h-[468px] items-center justify-center rounded-lg border-px bg-card-layer/25 p-2 shadow-xs"
+				className="border-px bg-card-layer/25 flex h-[75vh] min-h-[468px] items-center justify-center rounded-lg p-2 shadow-xs"
 			>
 				<ReactPlayer
 					url={video?.hls_url}
@@ -166,13 +171,14 @@ export default function PostContent({ post }: PostContentProps) {
 
 	////////////////////////////////////////////////////////////////////////////////
 
+	// Text logic
 	if (post.content.text.selftext_html) {
 		content = post.content.text.selftext_html;
 
 		const decodedHtml = decode(content);
 
 		return (
-			<section className="flex max-h-[360px] markdown_style items-start justify-start overflow-y-scroll rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
+			<section className="markdown_style border-px bg-card-layer/25 flex max-h-[360px] items-start justify-start overflow-y-scroll rounded-lg p-2 shadow-xs">
 				<div dangerouslySetInnerHTML={{ __html: decodedHtml }} />
 			</section>
 		);
@@ -180,19 +186,20 @@ export default function PostContent({ post }: PostContentProps) {
 
 	////////////////////////////////////////////////////////////////////////////////
 
+	// Rich video logic
 	if (postHint === 'rich:video') {
 		content = post.content.video;
 		const encodedHtml = content.secure_media?.oembed?.html;
 
-		if (!encodedHtml) return;
+		if (!encodedHtml) return null;
 
 		const decodedHtml = decode(encodedHtml);
 		const parsedDocument = parseDocument(decodedHtml);
-		//@ts-ignore
+		//@ts-expect-error children type is not defined and attribs throws error
 		const { src, allow, referrerpolicy, title } = parsedDocument.children[0].attribs;
 
 		return (
-			<section className="flex h-[75vh] min-h-[468px] items-center justify-center rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
+			<section className="border-px bg-card-layer/25 flex h-[75vh] min-h-[468px] items-center justify-center rounded-lg p-2 shadow-xs">
 				<iframe
 					className="h-full w-full rounded-md object-contain"
 					width={320}
@@ -209,6 +216,7 @@ export default function PostContent({ post }: PostContentProps) {
 
 	////////////////////////////////////////////////////////////////////////////////
 
+	// Link logic
 	if (postHint === 'link') {
 		content = post.content.link;
 
@@ -218,27 +226,26 @@ export default function PostContent({ post }: PostContentProps) {
 		const height = source?.height;
 
 		return (
-			<section className="h-max rounded-lg border-px bg-card-layer/25 p-2 shadow-xs grid place-content-center">
+			<section className="border-px bg-card-layer/25 grid h-max place-content-center rounded-lg p-2 shadow-xs">
 				<Link
 					href={content.url}
 					target="_blank"
-					className="relative h-64 max-w-max rounded-md overflow-hidden hover:brightness-110 "
+					className="relative h-64 max-w-max overflow-hidden rounded-md hover:brightness-110"
 				>
 					{imgSrc && (
-						<Image
+						<img
 							src={imgSrc}
 							alt={''}
 							aria-hidden
 							width={width}
 							height={height}
-							className="pointer-events-none mx-auto h-64 w-full object-cover rounded-md shadow-xs"
+							className="pointer-events-none mx-auto h-64 w-full rounded-md object-cover shadow-xs"
 						/>
 					)}
 
-					<p className="absolute bottom-2 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-md border-px bg-black/30 p-1 text-lg font-semibold backdrop-blur-md">
+					<p className="border-px absolute bottom-2 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-md bg-black/30 p-1 text-lg font-semibold backdrop-blur-md">
 						{content.domain} <ExternalLink className="size-4" />
 					</p>
-					{/* <div className="absolute bottom-0 left-0 z-50 h-16 w-full bg-black"></div> */}
 				</Link>
 			</section>
 		);
@@ -246,19 +253,22 @@ export default function PostContent({ post }: PostContentProps) {
 
 	////////////////////////////////////////////////////////////////////////////////
 
+	// Default link logic
 	if (!postHint && post.content.link.url) {
 		content = post.content.link;
 
 		return (
-			<section className="h-max rounded-lg border-px bg-card-layer/25 p-2 shadow-xs">
+			<section className="border-px bg-card-layer/25 h-max rounded-lg p-2 shadow-xs">
 				<Link
 					href={content.url}
 					target="_blank"
-					className="relative z-50 mx-auto flex w-max items-center gap-2 rounded-md border-px bg-black/30 p-2 text-lg font-semibold backdrop-blur-md"
+					className="border-px relative z-50 mx-auto flex w-max items-center gap-2 rounded-md bg-black/30 p-2 text-lg font-semibold backdrop-blur-md"
 				>
 					{content.domain} <ExternalLink className="size-4" />
 				</Link>
 			</section>
 		);
 	}
+
+	return null;
 }

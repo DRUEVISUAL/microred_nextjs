@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 // Types
 import { PropsWithChildren } from 'react';

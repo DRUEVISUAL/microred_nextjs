@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 // Components
 import Icon from '../Icon';
 import { VoteState } from './PostBottom';

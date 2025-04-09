@@ -33,14 +33,14 @@ export default function PostBottom({ post }: PostBottomProps) {
 	};
 
 	return (
-		<footer className="flex items-center justify-between rounded-lg border-px bg-card-layer text-sm shadow-xs">
+		<footer className="border-px bg-card-layer flex items-center justify-between rounded-lg text-sm shadow-xs">
 			<div className="flex items-center">
 				<VoteButton
 					type="upVote"
 					voteState={voteState}
 					handleClickVote={handleClickVote}
 				/>
-				<div className="h-full border-x-px border-card-layer-2 px-2 font-mono text-xs font-medium">
+				<div className="border-x-px border-card-layer-2 h-full px-2 font-mono text-xs font-medium">
 					{scoreCounter}
 				</div>
 				<VoteButton

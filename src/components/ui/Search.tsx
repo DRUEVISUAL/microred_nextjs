@@ -18,7 +18,7 @@ export default function Search({ value, handleSearchInput }: SearchProps) {
 			/>
 			<button
 				aria-label="Clear search"
-				className="border-px bg-input focus:bg-card-layer-2 focus:outline-primary h-full w-max rounded-r-lg border-l-0 p-2 focus:outline active:scale-90 hover:bg-white/15 cursor-pointer"
+				className="border-px bg-input focus:bg-card-layer-2 focus:outline-primary h-full w-max cursor-pointer rounded-r-lg border-l-0 p-2 hover:bg-white/15 focus:outline active:scale-90"
 				onClick={() => handleSearchInput('')}
 			>
 				<Icon name="close" />

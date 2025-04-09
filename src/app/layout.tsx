@@ -32,28 +32,41 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-	// metadataBase: new URL(''),
-	title: '',
-	description: '',
+	metadataBase: new URL('https://www.microred.vercel.app'),
+	title: 'Microred – Beautiful Reddit Browsing',
+	description: 'A light and modern alternative to browsing Reddit.',
 	referrer: 'origin',
 	creator: 'DRUEVISUAL',
 	publisher: 'DRUEVISUAL',
-	keywords: [],
+	keywords: ['reddit', 'redesign', 'microred', 'reddit client', 'nextjs app'],
 	robots: {
 		index: true,
 		follow: true,
 	},
 	generator: 'Next.js',
+	category: 'technology',
 	openGraph: {
 		type: 'website',
-		title: '',
-		description: '',
-		images: '/og-image.jpeg',
+		url: 'https://www.microred.vercel.app',
+		title: 'Microred – Beautiful Reddit Browsing',
+		description: 'A light and modern alternative to browsing Reddit.',
+		images: [
+			{
+				url: '/assets/og_img.jpg',
+				width: 1200,
+				height: 630,
+				alt: 'Microred logo',
+			},
+		],
+		siteName: 'Microred',
 	},
-	verification: {
-		google: 'google',
+	twitter: {
+		card: 'summary_large_image',
+		title: 'Microred – Beautiful Reddit Browsing',
+		description: 'An elegant and modern alternative to browsing Reddit.',
+		images: ['/assets/og_img.jpg'],
+		creator: '@druevisual',
 	},
-	category: '',
 };
 
 ////////////////////////////////////////////////////////////////////////////////

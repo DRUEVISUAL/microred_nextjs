@@ -4,11 +4,14 @@ import Image from 'next/image';
 
 // Types
 import { ConstructedRedditPost } from '@/lib/types';
+import SubredditData from '@/lib/subredditType';
 
 // Utilities
 import { calculatePostAge } from '@/utils/calculatePostAge';
-import { useQuery } from '@tanstack/react-query';
 import ampersandConverter from '@/utils/convertToAmpersand';
+
+// Hooks
+import { useQuery } from '@tanstack/react-query';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -16,7 +19,6 @@ type PostTopProps = { post: ConstructedRedditPost };
 
 export default function PostTop({ post }: PostTopProps) {
 	const { subreddit_name_prefixed, title, author, created_utc, permalink } = post?.top;
-	const subredditUrl = `https://www.reddit.com/${subreddit_name_prefixed}`;
 	const authorUrl = `https://www.reddit.com/user/${author}`;
 	const postUrl = `https://www.reddit.com/${permalink}`;
 	const age = calculatePostAge(created_utc);
@@ -41,7 +43,7 @@ export default function PostTop({ post }: PostTopProps) {
 			<div className="flex items-center justify-between gap-8 p-2">
 				<Link
 					href={`/${subreddit_name_prefixed}`}
-					className="focused flex items-center gap-2 text-xs sm:text-sm font-semibold"
+					className="focused flex items-center gap-2 text-xs font-semibold sm:text-sm"
 				>
 					{icon_img ? (
 						<Image

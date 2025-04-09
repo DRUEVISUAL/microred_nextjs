@@ -1,13 +1,21 @@
 'use client';
+// Utilities
+import dynamic from 'next/dynamic';
 
 // Components
 import Link from 'next/link';
-import AnimatedIconWithText from '../ui/AnimatedIcon';
 import Wrapper from '../ui/Wrapper';
+
+const AnimatedIconWithText = dynamic(() => import('../ui/AnimatedIcon'), {
+	ssr: false,
+});
+const BackgroundGradientAnimation = dynamic(
+	() => import('../ui/BackgroundGradientAnimation').then((mod) => mod.BackgroundGradientAnimation),
+	{ ssr: false },
+);
 
 // Types
 import { AnimatedIconName } from '../ui/AnimatedIcon';
-import { BackgroundGradientAnimation } from '../ui/BackgroundGradientAnimation';
 
 // Images
 import logo from '../../../public/assets/svg/logo.svg';
@@ -26,7 +34,7 @@ const links: Links = [
 	{ label: 'Browse', url: '/hot', name: 'browse_feed', target: '_self' },
 	{
 		label: 'Source',
-		url: 'https://www.github.com/DRUEVISUAL',
+		url: 'https://github.com/DRUEVISUAL/microred_nextjs',
 		name: 'source_code',
 		target: '_blank',
 	},

@@ -1,3 +1,6 @@
+// Types
+import SubredditData from '@/lib/subredditType';
+
 // Utilities
 import createSubredditBannerObject from '@/utils/createSubredditBannerObject';
 
@@ -31,7 +34,7 @@ export default function SubredditBanner({ slug }: SubredditBannerProps) {
 			<div className="z-20 flex items-center gap-4 group-hover:opacity-0">
 				{data?.iconImg ? (
 					<Image
-						src={data?.iconImg!}
+						src={data.iconImg!}
 						width={128}
 						height={128}
 						alt={slug + ' subreddit image'}

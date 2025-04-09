@@ -10,14 +10,21 @@ import Post from '../ui/Post/Post';
 import Wrapper from '../ui/Wrapper';
 import getFeed from '@/utils/getFeed';
 import Skeleton from '../ui/Post/Skeleton';
-import { BackgroundGradientAnimation } from '../ui/BackgroundGradientAnimation';
 import SubredditBanner from '../ui/SubredditBanner';
+
+const BackgroundGradientAnimation = dynamic(
+	() => import('../ui/BackgroundGradientAnimation').then((mod) => mod.BackgroundGradientAnimation),
+	{
+		ssr: false,
+	},
+);
 
 // Types
 import { Feed } from '@/lib/types';
 
 // Utilities
 import createPostObject from '@/utils/createPostObject';
+import dynamic from 'next/dynamic';
 
 // Images
 import { AlertTriangle } from 'lucide-react';
@@ -49,12 +56,12 @@ export default function FeedPage({ slug, isSubreddit }: FeedPageProps) {
 
 	useEffect(() => {
 		if (inView) query.fetchNextPage();
-	}, [inView]);
+	}, [inView, query]);
 
 	return (
 		<Wrapper
 			sectionLabel={slug + ' feed'}
-			className="flex w-auto max-w-[1740px] pt-20 basis-full flex-col items-center justify-center gap-12 lg:ml-[272px] lg:pl-4!"
+			className="flex w-auto max-w-[1740px] basis-full flex-col items-center justify-center gap-12 pt-20 lg:ml-[272px] lg:pl-4!"
 		>
 			{isSubreddit && <SubredditBanner slug={slug} />}
 
